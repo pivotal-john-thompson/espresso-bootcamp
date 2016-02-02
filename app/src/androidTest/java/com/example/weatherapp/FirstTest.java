@@ -1,6 +1,7 @@
 package com.example.weatherapp;
 
 import android.os.SystemClock;
+import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.test.suitebuilder.annotation.LargeTest;
@@ -16,6 +17,7 @@ import static android.support.test.espresso.Espresso.openActionBarOverflowOrOpti
 import static android.support.test.espresso.Espresso.openContextualActionModeOverflowMenu;
 import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.swipeDown;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -57,5 +59,14 @@ public class FirstTest {
         onView(withId(android.R.id.edit)).perform(clearText(), typeText("Waterloo,Canada"));
         onView(withId(android.R.id.button1)).perform(click());
         onView(allOf(withId(android.R.id.summary), withText("Waterloo,Canada")));
+    }
+
+    @Test
+    public void task3()
+    {
+        onView(withId(R.id.refresh_layout)).perform(swipeDown());
+        SystemClock.sleep(5);
+        onView(withText("Waterloo,CA")).check(matches(isDisplayed()));
+        //SystemClock.sleep(10000);
     }
 }
